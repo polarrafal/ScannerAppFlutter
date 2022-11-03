@@ -3,18 +3,22 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:scannerappflutter/constants/core/data_wedge_info.dart';
 import 'package:scannerappflutter/constants/styles/styles_constants.dart';
+import 'package:scannerappflutter/services/configuration_service.dart';
 import 'package:scannerappflutter/services/zebra_printer_service.dart';
-import 'package:scannerappflutter/visuals/widgets/buttons/standard_button.dart';
-import 'package:scannerappflutter/visuals/widgets/buttons/standard_navigation_back_button.dart';
+import 'package:scannerappflutter/ui/screens/base_page/base_page.dart';
+import 'package:scannerappflutter/ui/widgets/buttons/standard_button/standard_button.dart';
+import 'package:scannerappflutter/ui/widgets/buttons/standard_button/standard_navigation_back_button.dart';
+import 'package:zsdk/zsdk.dart';
 
-class ScannerView extends StatefulWidget {
-  const ScannerView({super.key});
+class ScannerScreen extends BasePage {
+  const ScannerScreen({super.key});
 
   @override
-  State<ScannerView> createState() => _ScannerViewState();
+  // ignore: library_private_types_in_public_api
+  _ScannerScreenState createState() => _ScannerScreenState();
 }
 
-class _ScannerViewState extends State<ScannerView> {
+class _ScannerScreenState extends BasePageState<ScannerScreen> {
   static const EventChannel scanChannel = EventChannel(dwScan);
   final _barcodeTextEditingController = TextEditingController();
   final _zebraPrinterService = ZebraPrinterService();
@@ -24,6 +28,12 @@ class _ScannerViewState extends State<ScannerView> {
   void initState() {
     super.initState();
     scanChannel.receiveBroadcastStream().listen(_onEvent, onError: _onError);
+  }
+
+  @override
+  void dispose() {
+    _barcodeTextEditingController.dispose();
+    super.dispose();
   }
 
   void _onEvent(event) {
@@ -40,8 +50,11 @@ class _ScannerViewState extends State<ScannerView> {
     });
   }
 
-  void printPressed() {
-    var testPrinterIpAddress = '192.168.100.180';
+  Future printPressedCommand() async {
+    await busyActionAsync(printPressed());
+  }
+
+  Future<PrinterResponse> printPressed() async {
     var printingData = '''
                           ^XA,
                           ^PQ1,
@@ -55,7 +68,10 @@ class _ScannerViewState extends State<ScannerView> {
                           ^XZ
                        ''';
 
-    _zebraPrinterService.printZplAsync(testPrinterIpAddress, printingData);
+    var printingResult = await _zebraPrinterService.printZplAsync(
+        printingData, ConfigurationService.printerIpAddress);
+
+    return printingResult;
   }
 
   @override
@@ -115,7 +131,7 @@ class _ScannerViewState extends State<ScannerView> {
                     Container(
                       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                       child: StandardButton(
-                        onPressed: printPressed,
+                        onPressed: printPressedCommand,
                         text: "Print",
                       ),
                     ),

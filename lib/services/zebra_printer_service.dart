@@ -28,7 +28,7 @@ class ZebraPrinterService {
   }
 
   Future<PrinterResponse> printZplAsync(
-      String printerIpAddress, String printingData) async {
+      String printingData, String printerIpAddress) async {
     var printingResponse = await zsdk.printZplDataOverTCPIP(
         data: printingData, address: printerIpAddress, port: printerPort);
 

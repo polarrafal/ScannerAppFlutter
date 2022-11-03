@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scannerappflutter/visuals/widgets/buttons/standard_button.dart';
+import 'package:scannerappflutter/ui/widgets/buttons/standard_button/standard_button.dart';
 
 class StandardNavigationBackButton extends StatelessWidget {
   const StandardNavigationBackButton(

@@ -5,7 +5,7 @@ import '../../../../constants/core/data_wedge_info.dart';
 
 class DataWedgeService {
   static const MethodChannel _methodChannel = MethodChannel(dwCommand);
-  static const _profileName = "DataWedgeFlutterDemo";
+  static const _profileName = "scannerFlutterApp";
 
   Future<void> sendDataWedgeCommand(String command, String parameter) async {
     try {
