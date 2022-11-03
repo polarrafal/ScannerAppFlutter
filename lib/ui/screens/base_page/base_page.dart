@@ -30,8 +30,6 @@ class BasePageState<T extends BasePage> extends State<T> {
   Future busyActionAsync(Future function) async {
     try {
       _setBusy();
-
-      // simulate app processing for PoC
       await Future.delayed(const Duration(milliseconds: 500));
       await function;
     } finally {
