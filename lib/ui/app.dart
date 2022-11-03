@@ -14,7 +14,7 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
           primaryColor: Colors.white,
-          scaffoldBackgroundColor: Colors.grey.shade800),
+          scaffoldBackgroundColor: Colors.grey.shade900),
       initialRoute: AppRoute.initializationScreen.name,
       routes: {
         AppRoute.initializationScreen.name: (context) =>

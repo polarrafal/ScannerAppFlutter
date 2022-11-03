@@ -4,7 +4,6 @@ import 'package:scannerappflutter/services/data_wedge_service.dart';
 import 'package:scannerappflutter/ui/app_route.dart';
 import 'package:scannerappflutter/ui/screens/base_page/base_page.dart';
 import 'package:scannerappflutter/ui/widgets/buttons/column_button/column_navigation_button.dart';
-import 'package:scannerappflutter/ui/widgets/buttons/standard_button/standard_navigation_button.dart';
 
 class StartScreen extends BasePage {
   const StartScreen({super.key});
@@ -40,7 +39,7 @@ class _StartScreenState extends BasePageState<StartScreen> {
                       flex: 2,
                       child: Center(
                         child: Text(
-                          "Mobile scan&print",
+                          "Mobile scan & print",
                           style: kTitleTextStyle,
                         ),
                       ),
@@ -51,11 +50,11 @@ class _StartScreenState extends BasePageState<StartScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ColumnNavigationButton(
-                              text: "Login",
+                              text: "Log in",
                               destination: AppRoute.loginScreen,
                               context: context),
                           ColumnNavigationButton(
-                              text: "Configuration",
+                              text: "Configure",
                               destination: AppRoute.configurationScreen,
                               context: context),
                         ],
