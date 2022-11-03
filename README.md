@@ -1,16 +1,5 @@
 # scannerappflutter
 
-A new Flutter project.
+Flutter project with scanning and printing for Zebra devices. Project based on Zebra example in github and docs.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Simple flow is shown, to setup baseUrl and printer Ip address, then user can simulate login and start scanning and printing barcodes.
