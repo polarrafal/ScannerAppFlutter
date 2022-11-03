@@ -54,18 +54,12 @@ class _ScannerScreenState extends BasePageState<ScannerScreen> {
     await busyActionAsync(printPressed());
   }
 
-  Future<PrinterResponse> printPressed() async {
+  Future<PrinterResponse?> printPressed() async {
+    // sample zebra definition from zebra docs
     var printingData = '''
-                          ^XA,
-                          ^PQ1,
-                          ^PW456,
-                          ^POI,
-                          ^LT0,
-                          ^FO100,45^ADN^FD1000K^FS,
-                          ^FO180,45^A0N,35,40^FD\$99.99^FS,
-                          ^FO95,78^BY1^BCN,45,N,N^FD$_barcodeString^FS,
-                          ^FO120,128^A0N,20,20^FD12 00 000000000 09999 00^FS,
-                          ^XZ
+^XA,
+^FO100,35^BY1^BCN,100,N,N^FD1234123412341234^FS,
+^XZ
                        ''';
 
     var printingResult = await _zebraPrinterService.printZplAsync(

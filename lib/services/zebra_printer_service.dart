@@ -27,12 +27,17 @@ class ZebraPrinterService {
     return printerResponse;
   }
 
-  Future<PrinterResponse> printZplAsync(
+  Future<PrinterResponse?> printZplAsync(
       String printingData, String printerIpAddress) async {
-    var printingResponse = await zsdk.printZplDataOverTCPIP(
-        data: printingData, address: printerIpAddress, port: printerPort);
+    try {
+      var printingResponse = await zsdk.printZplDataOverTCPIP(
+          data: printingData, address: printerIpAddress, port: printerPort);
 
-    final printerResponse = PrinterResponse.fromMap(printingResponse);
-    return printerResponse;
+      final printerResponse = PrinterResponse.fromMap(printingResponse);
+      return printerResponse;
+    } catch (e) {
+      // Todo: handle exception
+      return null;
+    }
   }
 }
